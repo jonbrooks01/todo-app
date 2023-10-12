@@ -1,8 +1,34 @@
-# React + Vite
+# LAB - 31
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+To Do List Manager Phase 1: Incorporate configuration settings to the application.
 
-Currently, two official plugins are available:
+Author: Jonathan Brooks
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[Pull Request](https://github.com/jonbrooks01/todo-app/pull/1)
+
+<!-- [deployed server](https://basic-server-4efy.onrender.com) -->
+
+## Setup
+
+.env requirements: NA
+
+PORT - 5173
+
+## Running the app
+
+ npm run dev
+
+<!-- Endpoint: Returns Object -->
+
+<!-- {
+  "domain": "deployment-practice-main.onrender.com/",
+  "status": "{name: name}",
+ "port":
+} -->
+Tests
+Unit Tests: npm run test
+<!-- Lint Tests: npm run lint -->
+
+## UML
+
+<!-- ![UML](./UML.png) -->
