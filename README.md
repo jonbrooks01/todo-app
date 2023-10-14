@@ -31,4 +31,4 @@ Unit Tests: npm run test
 
 ## UML
 
-<!-- ![UML](./UML.png) -->
+![UML](./UML.png)

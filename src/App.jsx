@@ -1,19 +1,37 @@
-import React from 'react';
-import Header from './Components/Header';
-import List from './Components/List';
-import Footer from './Components/Footer';
-
+import React, { createContext, useEffect, useState } from 'react';
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import { darkMode } from './Themes/darkMode.js';
+import { lightMode } from './Themes/lightMode';
 import Todo from './Components/Todo';
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <>
-        <Header />
+export const GlobalContext = createContext(null);
+
+const App = () => {
+  const [appTheme, setAppTheme] = useState('light');
+
+  useEffect(() => {
+    const mode = localStorage.getItem('theme');
+    setAppTheme(mode);
+  }, []);
+  console.log(appTheme);
+  return (
+    <GlobalContext.Provider
+      value={{
+        displayCount: 3,
+        hideCompleted: false,
+        sortWord: 'difficulty',
+        toggleAppTheme: () =>
+          setAppTheme(appTheme === 'light' ? 'dark' : 'light'),
+        appTheme,
+      }}
+    >
+      <ThemeProvider theme={appTheme === 'light' ? lightMode : darkMode}>
+        <CssBaseline />
         <Todo />
-        <List />
-        <Footer />
-      </>
-    );
-  }
-}
+      </ThemeProvider>
+    </GlobalContext.Provider>
+  );
+};
+
+export default App;
