@@ -1,21 +1,37 @@
-import React, { createContext } from 'react';
-
+import React, { createContext, useEffect, useState } from 'react';
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import { darkMode } from './Themes/darkMode.js';
+import { lightMode } from './Themes/lightMode';
 import Todo from './Components/Todo';
 
 export const GlobalContext = createContext(null);
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <GlobalContext.Provider
-        value={{
-          displayCount: 1,
-          hideCompleted: false,
-          sortWord: 'difficulty',
-        }}
-      >
+const App = () => {
+  const [appTheme, setAppTheme] = useState('light');
+
+  useEffect(() => {
+    const mode = localStorage.getItem('theme');
+    setAppTheme(mode);
+  }, []);
+  console.log(appTheme);
+  return (
+    <GlobalContext.Provider
+      value={{
+        displayCount: 3,
+        hideCompleted: false,
+        sortWord: 'difficulty',
+        toggleAppTheme: () =>
+          setAppTheme(appTheme === 'light' ? 'dark' : 'light'),
+        appTheme,
+      }}
+    >
+      <ThemeProvider theme={appTheme === 'light' ? lightMode : darkMode}>
+        <CssBaseline />
         <Todo />
-      </GlobalContext.Provider>
-    );
-  }
-}
+      </ThemeProvider>
+    </GlobalContext.Provider>
+  );
+};
+
+export default App;

@@ -9,7 +9,7 @@ import dummyData from './dummyData.json';
 
 const Todo = () => {
   const [defaultValues] = useState({
-    difficulty: 4,
+    difficulty: 2,
   });
   const [list, setList] = useState(dummyData);
   const [incomplete, setIncomplete] = useState([]);
@@ -19,7 +19,11 @@ const Todo = () => {
     item.id = uuid();
     item.complete = false;
     console.log(item);
-    setList([...list, item]);
+
+    const sortedList = [...list, item];
+
+    sortedList.sort((a, b) => a.difficulty - b.difficulty);
+    setList(sortedList);
   }
 
   function deleteItem(id) {

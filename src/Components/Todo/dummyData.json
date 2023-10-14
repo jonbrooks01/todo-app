@@ -1,13 +1,13 @@
 [
   {
-    "difficulty": 4,
+    "difficulty": 1,
     "text": "clean room",
     "assignee": "sara",
     "id": "9b8ef736-3984-4911-8068-9d6141df115e",
     "complete": false
   },
   {
-    "difficulty": 4,
+    "difficulty": 3,
     "text": "take a bath",
     "assignee": "indiana",
     "id": "63a6d942-ca3f-4c43-9428-8c27e0fd43da",
@@ -21,7 +21,7 @@
     "complete": false
   },
   {
-    "difficulty": 4,
+    "difficulty": 5,
     "text": "stop barking",
     "assignee": "mj",
     "id": "76c64dbc-79b3-461a-88d3-7b6c1431ea66",
