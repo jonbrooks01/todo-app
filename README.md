@@ -1,6 +1,6 @@
-# LAB - 31
+# LAB - 32
 
-To Do List Manager Phase 1: Incorporate configuration settings to the application.
+To Do List Manager Phase 2: Incorporate configuration settings to the application.
 
 Author: Jonathan Brooks
 
