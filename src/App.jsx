@@ -19,7 +19,7 @@ const App = () => {
     <GlobalContext.Provider
       value={{
         displayCount: 3,
-        hideCompleted: false,
+        hideCompleted: true,
         sortWord: 'difficulty',
         toggleAppTheme: () =>
           setAppTheme(appTheme === 'light' ? 'dark' : 'light'),
