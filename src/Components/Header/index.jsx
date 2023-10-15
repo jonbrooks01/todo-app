@@ -1,6 +1,6 @@
 // import React from 'react';
-import { useContext } from 'react';
 import { Button } from '@mui/material';
+import { useContext } from 'react';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import { GlobalContext } from '../../App';
