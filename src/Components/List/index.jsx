@@ -5,15 +5,15 @@ import { GlobalContext } from '../../App';
 import { useEffect } from 'react';
 
 const TodoList = ({ list, toggleComplete, incomplete }) => {
-  const { hideComplete, displayCount } = useContext(GlobalContext);
+  const { hideCompleted, displayCount } = useContext(GlobalContext);
   const [count, setCount] = useState(0);
   const [page, setPage] = useState(1);
 
   const listToUse = useMemo(() => {
-    console.log(hideComplete, incomplete, list);
-    if (hideComplete) return incomplete;
+    console.log(hideCompleted, incomplete, list);
+    if (hideCompleted) return incomplete;
     else return list;
-  }, [hideComplete, incomplete, list]);
+  }, [hideCompleted, incomplete, list]);
 
   useEffect(() => {
     const totalPages = Math.floor(listToUse.length / displayCount);
@@ -22,8 +22,8 @@ const TodoList = ({ list, toggleComplete, incomplete }) => {
     setCount(addOne ? totalPages + 1 : totalPages);
   }, [displayCount, listToUse]);
 
-  const handlePageChange = (e, epage) => {
-    setPage(epage);
+  const handlePageChange = (e, newPage) => {
+    setPage(newPage);
   };
 
   const startIndex = useMemo(() => {
