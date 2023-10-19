@@ -4,13 +4,22 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { darkMode } from './Themes/darkMode.js';
 import { lightMode } from './Themes/lightMode';
 import Todo from './Components/Todo';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Outlet,
+} from 'react-router-dom';
 // import { Settings } from '@mui/icons-material';
 import Settings from './Context/Settings/index.jsx';
 import NavBar from './Components/Nav/index.jsx';
 
 export const GlobalContext = createContext(null);
 
+const Home = () => {
+  // Your main content component
+  return <Todo />; // Assuming Todo is your main content
+};
 const App = () => {
   const [appTheme, setAppTheme] = useState('light');
   const [settingData, setSettingData] = useState({
@@ -40,8 +49,10 @@ const App = () => {
         <Router>
           <NavBar />
           <Routes>
-            <Route path="/home" element={<App />} />
-            <Route path="/settings" element={<Settings />} />
+            <Route path="/" element={<Outlet />}>
+              <Route index element={<Home />} />
+              <Route path="/settings" element={<Settings />} />
+            </Route>
           </Routes>
         </Router>
       </ThemeProvider>

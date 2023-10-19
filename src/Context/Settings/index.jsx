@@ -1,12 +1,28 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { GlobalContext } from '../../App';
+
 // import './settings.scss';
 const Settings = () => {
   const { displayCount, hideCompleted, sortWord, setSettingData } =
     useContext(GlobalContext);
   // const context = useContext(GlobalContext);
   const [submittedData, setSubmittedData] = useState(null);
+
+  useEffect(() => {
+    const savedPreferences = localStorage.getItem('userPreferences');
+    if (savedPreferences) {
+      const parsedPreferences = JSON.parse(savedPreferences);
+      setSettingData(parsedPreferences);
+    }
+  }, [setSettingData]);
+
+  // Save preferences to local storage whenever they change
+  useEffect(() => {
+    const userPreferences = { displayCount, hideCompleted, sortWord };
+    localStorage.setItem('userPreferences', JSON.stringify(userPreferences));
+  }, [displayCount, hideCompleted, sortWord]);
+
   // console.log(context);
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
