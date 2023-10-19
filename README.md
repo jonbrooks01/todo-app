@@ -1,6 +1,6 @@
-# LAB - 32
+# LAB - 33
 
-To Do List Manager Phase 2: Incorporate configuration settings to the application.
+To Do List Manager Phase 3: Adding security and access controls to the application.
 
 Author: Jonathan Brooks
 
