@@ -9,12 +9,10 @@ const NavBar = () => {
   return (
     <nav>
       <ul>
-        <Button component={Link} to="/home">
-          <HomeIcon /> Home
-        </Button>
-        <Button component={Link} to="/settings">
-          <SettingsIcon /> Settings
-        </Button>
+        <Link to={'/'}>Home</Link>
+        <HomeIcon />
+        <Link to={'/settings'}>Settings</Link>
+        <SettingsIcon />
       </ul>
     </nav>
   );

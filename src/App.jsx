@@ -4,12 +4,29 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { darkMode } from './Themes/darkMode.js';
 import { lightMode } from './Themes/lightMode';
 import Todo from './Components/Todo';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Outlet,
+} from 'react-router-dom';
+// import { Settings } from '@mui/icons-material';
+import Settings from './Context/Settings/index.jsx';
+import NavBar from './Components/Nav/index.jsx';
 
 export const GlobalContext = createContext(null);
 
+const Home = () => {
+  // Your main content component
+  return <Todo />; // Assuming Todo is your main content
+};
 const App = () => {
   const [appTheme, setAppTheme] = useState('light');
-
+  const [settingData, setSettingData] = useState({
+    displayCount: 3,
+    hideCompleted: true,
+    sortWord: 'difficulty',
+  });
   useEffect(() => {
     const mode = localStorage.getItem('theme');
     setAppTheme(mode);
@@ -18,9 +35,10 @@ const App = () => {
   return (
     <GlobalContext.Provider
       value={{
-        displayCount: 3,
-        hideCompleted: true,
-        sortWord: 'difficulty',
+        displayCount: settingData.displayCount,
+        hideCompleted: settingData.hideCompleted,
+        sortWord: settingData.sortWord,
+        setSettingData,
         toggleAppTheme: () =>
           setAppTheme(appTheme === 'light' ? 'dark' : 'light'),
         appTheme,
@@ -28,7 +46,15 @@ const App = () => {
     >
       <ThemeProvider theme={appTheme === 'light' ? lightMode : darkMode}>
         <CssBaseline />
-        <Todo />
+        <Router>
+          <NavBar />
+          <Routes>
+            <Route path="/" element={<Outlet />}>
+              <Route index element={<Home />} />
+              <Route path="/settings" element={<Settings />} />
+            </Route>
+          </Routes>
+        </Router>
       </ThemeProvider>
     </GlobalContext.Provider>
   );

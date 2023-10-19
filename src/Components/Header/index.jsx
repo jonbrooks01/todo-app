@@ -9,7 +9,7 @@ const Header = ({ incomplete }) => {
   const { toggleAppTheme, appTheme } = useContext(GlobalContext);
 
   const handleThemeClick = () => {
-    localStorage.SetItem('theme', appTheme === 'light' ? 'dark' : 'light');
+    localStorage.setItem('theme', appTheme === 'light' ? 'dark' : 'light');
     toggleAppTheme();
   };
   return (
