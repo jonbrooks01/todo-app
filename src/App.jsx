@@ -10,9 +10,11 @@ import {
   Route,
   Outlet,
 } from 'react-router-dom';
-// import { Settings } from '@mui/icons-material';
 import Settings from './Context/Settings/index.jsx';
 import NavBar from './Components/Nav/index.jsx';
+import Auth from './Components/Auth/auth.jsx';
+import Login from './Components/Login/index.jsx';
+import LoginContext from './Context/JWT/index.jsx';
 
 export const GlobalContext = createContext(null);
 
@@ -33,30 +35,47 @@ const App = () => {
   }, []);
   console.log(appTheme);
   return (
-    <GlobalContext.Provider
-      value={{
-        displayCount: settingData.displayCount,
-        hideCompleted: settingData.hideCompleted,
-        sortWord: settingData.sortWord,
-        setSettingData,
-        toggleAppTheme: () =>
-          setAppTheme(appTheme === 'light' ? 'dark' : 'light'),
-        appTheme,
-      }}
-    >
-      <ThemeProvider theme={appTheme === 'light' ? lightMode : darkMode}>
-        <CssBaseline />
-        <Router>
-          <NavBar />
-          <Routes>
-            <Route path="/" element={<Outlet />}>
-              <Route index element={<Home />} />
-              <Route path="/settings" element={<Settings />} />
-            </Route>
-          </Routes>
-        </Router>
-      </ThemeProvider>
-    </GlobalContext.Provider>
+    <LoginContext>
+      <Login />
+      <GlobalContext.Provider
+        value={{
+          displayCount: settingData.displayCount,
+          hideCompleted: settingData.hideCompleted,
+          sortWord: settingData.sortWord,
+          setSettingData,
+          toggleAppTheme: () =>
+            setAppTheme(appTheme === 'light' ? 'dark' : 'light'),
+          appTheme,
+        }}
+      >
+        <ThemeProvider theme={appTheme === 'light' ? lightMode : darkMode}>
+          <CssBaseline />
+          <Router>
+            <NavBar />
+            <Routes>
+              <Route path="/" element={<Outlet />}>
+                <Route
+                  index
+                  element={
+                    <Auth capability="update">
+                      <Home />
+                    </Auth>
+                  }
+                />
+                <Route
+                  path="/settings"
+                  element={
+                    <Auth capability="update">
+                      <Settings />
+                    </Auth>
+                  }
+                />
+              </Route>
+            </Routes>
+          </Router>
+        </ThemeProvider>
+      </GlobalContext.Provider>
+    </LoginContext>
   );
 };
 
