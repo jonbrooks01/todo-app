@@ -6,6 +6,9 @@ import Header from '../Header';
 import TodoList from '../List';
 import TodoForm from '../TodoForm';
 import dummyData from './dummyData.json';
+import Auth from '../Auth/auth';
+import axios from 'axios';
+import Footer from '../Footer';
 
 const Todo = () => {
   const [defaultValues] = useState({
@@ -55,19 +58,22 @@ const Todo = () => {
   return (
     <>
       <Header incomplete={incomplete} />
-
-      <TodoForm
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-        defaultValues={defaultValues}
-        deleteItem={deleteItem}
-      />
+      <Auth capability={'create'}>
+        <TodoForm
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          defaultValues={defaultValues}
+          deleteItem={deleteItem}
+        />
+      </Auth>
 
       <TodoList
         list={list}
         toggleComplete={toggleComplete}
         incomplete={incomplete}
+        deleteItem={deleteItem}
       />
+      <Footer />
     </>
   );
 };

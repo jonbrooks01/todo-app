@@ -34,6 +34,7 @@ const App = () => {
     setAppTheme(mode);
   }, []);
   console.log(appTheme);
+
   return (
     <LoginContext>
       <Login />
@@ -54,22 +55,8 @@ const App = () => {
             <NavBar />
             <Routes>
               <Route path="/" element={<Outlet />}>
-                <Route
-                  index
-                  element={
-                    <Auth capability="update">
-                      <Home />
-                    </Auth>
-                  }
-                />
-                <Route
-                  path="/settings"
-                  element={
-                    <Auth capability="update">
-                      <Settings />
-                    </Auth>
-                  }
-                />
+                <Route index element={<Home />} />
+                <Route path="/settings" element={<Settings />} />
               </Route>
             </Routes>
           </Router>

@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { GlobalContext } from '../../App';
+import Auth from '../../Components/Auth/auth';
 
 // import './settings.scss';
 const Settings = () => {
@@ -36,60 +37,64 @@ const Settings = () => {
     setSettingData({ displayCount, hideCompleted, sortWord: e.target.value });
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>
-        <SettingsIcon /> Manage Settings
-      </h2>
+    <Auth capability="update">
+      <form onSubmit={handleSubmit}>
+        <h2>
+          <SettingsIcon /> Manage Settings
+        </h2>
 
-      <h3>Update Settings</h3>
-      <label className="switch">
-        <input
-          type="checkbox"
-          name="hideCompleted"
-          className="slider"
-          checked={hideCompleted}
-          onChange={handleChange}
-        />
-        <span className="slider round"></span>
-        <span>Show Completed ToDos</span>
-      </label>
+        <h3>Update Settings</h3>
+        <label className="switch">
+          <input
+            type="checkbox"
+            name="hideCompleted"
+            className="slider"
+            checked={hideCompleted}
+            onChange={handleChange}
+          />
+          <span className="slider round"></span>
+          <span>Show Completed ToDos</span>
+        </label>
 
-      <label>
-        <span>Items Per Page</span>
-        <input
-          // onChange={handleChange}
-          onChange={handleChange}
-          name="displayCount"
-          type="number"
-          value={displayCount}
-          placeholder="0"
-        />
-      </label>
+        <label>
+          <span>Items Per Page</span>
+          <input
+            // onChange={handleChange}
+            onChange={handleChange}
+            name="displayCount"
+            type="number"
+            value={displayCount}
+            placeholder="0"
+          />
+        </label>
 
-      <label>
-        <span>Sort Keyword</span>
-        <input
-          onChange={handleChange}
-          name="sortWord"
-          type="text"
-          value={sortWord || ''}
-          placeholder="difficulty"
-        />
-      </label>
+        <label>
+          <span>Sort Keyword</span>
+          <input
+            onChange={handleChange}
+            name="sortWord"
+            type="text"
+            value={sortWord || ''}
+            placeholder="difficulty"
+          />
+        </label>
 
-      <label>
-        <button type="submit">Show New Settings</button>
-      </label>
+        <label>
+          <button type="submit">Show New Settings</button>
+        </label>
 
-      {submittedData && (
-        <div>
-          <h3>Submitted Data</h3>
-          <p>Show Completed ToDos: {submittedData.hideCompleted.toString()}</p>
-          <p>Items Per Page: {submittedData.displayCount}</p>
-          <p>Sort Keyword: {submittedData.sortWord}</p>
-        </div>
-      )}
-    </form>
+        {submittedData && (
+          <div>
+            <h3>Submitted Data</h3>
+            <p>
+              Show Completed ToDos: {submittedData.hideCompleted.toString()}
+            </p>
+            <p>Items Per Page: {submittedData.displayCount}</p>
+            <p>Sort Keyword: {submittedData.sortWord}</p>
+          </div>
+        )}
+      </form>
+    </Auth>
   );
 };
 
