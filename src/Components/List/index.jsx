@@ -3,8 +3,14 @@ import { useContext, useMemo, useState } from 'react';
 import { Pagination } from '@mui/material';
 import { GlobalContext } from '../../App';
 import { useEffect } from 'react';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Auth from '../Auth/auth';
 
-const TodoList = ({ list, toggleComplete, incomplete }) => {
+const TodoList = ({ list, toggleComplete, incomplete, deleteItem }) => {
   const { hideCompleted, displayCount } = useContext(GlobalContext);
   const [count, setCount] = useState(0);
   const [page, setPage] = useState(1);
@@ -36,27 +42,48 @@ const TodoList = ({ list, toggleComplete, incomplete }) => {
 
   return (
     <>
-      {listToUse.slice(startIndex, endIndex).map((item) => (
-        <div key={item.id}>
-          <p>{item.text}</p>
-          <p>
-            <small>Assigned to: {item.assignee}</small>
-          </p>
-          <p>
-            <small>Difficulty: {item.difficulty}</small>
-          </p>
-          <div onClick={() => toggleComplete(item.id)}>
-            Complete: {item.complete.toString()}
-          </div>
-          <hr />
-        </div>
-      ))}
-      <Pagination
-        count={count}
-        variant="outlined"
-        color="secondary"
-        onChange={handlePageChange}
-      />
+      <Auth>
+        <Card>
+          <CardContent>
+            {listToUse.slice(startIndex, endIndex).map((item) => (
+              <div key={item.id}>
+                <Typography
+                  sx={{ fontSize: 16 }}
+                  color="text.secondary"
+                  gutterBottom
+                >
+                  <p>To Do: {item.text}</p>
+                </Typography>
+                <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                  <p>
+                    <small>Assigned to: {item.assignee}</small>
+                  </p>
+                </Typography>
+                <p>
+                  <small>Difficulty: {item.difficulty}</small>
+                </p>
+                <div onClick={() => toggleComplete(item.id)}>
+                  Complete: {item.complete.toString()}
+                </div>
+                <CardActions>
+                  <Auth capability="delete">
+                    <Button size="small" onClick={() => deleteItem(item.id)}>
+                      Delete
+                    </Button>
+                  </Auth>
+                </CardActions>
+                <hr />
+              </div>
+            ))}
+            <Pagination
+              count={count}
+              variant="outlined"
+              color="secondary"
+              onChange={handlePageChange}
+            />
+          </CardContent>
+        </Card>
+      </Auth>
     </>
   );
 };

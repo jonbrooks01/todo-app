@@ -1,17 +1,7 @@
 // import React from 'react';
 import { Button } from '@mui/material';
-import { useContext } from 'react';
-import LightModeIcon from '@mui/icons-material/LightMode';
-import DarkModeIcon from '@mui/icons-material/DarkMode';
-import { GlobalContext } from '../../App';
 
 const Header = ({ incomplete }) => {
-  const { toggleAppTheme, appTheme } = useContext(GlobalContext);
-
-  const handleThemeClick = () => {
-    localStorage.setItem('theme', appTheme === 'light' ? 'dark' : 'light');
-    toggleAppTheme();
-  };
   return (
     <header
       data-testid="todo-header"
@@ -20,9 +10,6 @@ const Header = ({ incomplete }) => {
       <h1 data-testid="todo-h1">
         To Do List: {incomplete.length} items pending
       </h1>
-      <Button onClick={handleThemeClick}>
-        {appTheme === 'light' ? <DarkModeIcon /> : <LightModeIcon />}
-      </Button>
     </header>
   );
 };
