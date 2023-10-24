@@ -1,12 +1,14 @@
-# LAB - 33
+# LAB - 34
 
-To Do List Manager Phase 3: Adding security and access controls to the application.
+To Do List Manager Phase 4: Integrating with a live API.
 
 Author: Jonathan Brooks
 
 [Pull Request](https://github.com/jonbrooks01/todo-app/pull/1)
 
-<!-- [deployed server](https://basic-server-4efy.onrender.com) -->
+[Server Repo](https://github.com/jonbrooks01/todoServer-)
+
+[deployed server](https://todoapp-0suw.onrender.com)
 
 ## Setup
 

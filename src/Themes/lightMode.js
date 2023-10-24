@@ -13,11 +13,5 @@ export const lightMode = createTheme({
     background: {
       default: '#f2e8cf',
     },
-    header: {
-      default: '#386641',
-    },
-    footer: {
-      default: '#386641',
-    },
   },
 });
