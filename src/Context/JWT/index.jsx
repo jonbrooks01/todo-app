@@ -30,6 +30,13 @@ import axios from 'axios';
 //   },
 // };
 
+const capabilities = {
+  Administrator: ['create', 'update', 'delete'],
+  Editor: ['create', 'update'],
+  Writer: ['create'],
+  User: [],
+};
+
 export const LoginContext = React.createContext();
 
 const LoginProvider = (props) => {
@@ -46,6 +53,7 @@ const LoginProvider = (props) => {
   const validateToken = useCallback((token) => {
     try {
       let validUser = jwt_decode(token);
+      validUser.capabilities = capabilities[validUser.username];
       setLoginState(true, token, validUser);
     } catch (e) {
       setLoginState(false, null, {}, e);
@@ -64,9 +72,20 @@ const LoginProvider = (props) => {
 
   const login = async (username, password) => {
     let { loggedIn, token, user } = state;
-    let auth = testUsers[username];
 
-    if (auth && auth.password === password) {
+    const config = {
+      baseURL: 'https://todoapp-0suw.onrender.com',
+      url: '/signin',
+      method: 'post',
+      auth: { username, password },
+    };
+
+    const response = await axios(config);
+
+    const auth = response.data.user;
+    console.log(auth);
+
+    if (auth && auth.username === username) {
       try {
         validateToken(auth.token);
       } catch (e) {

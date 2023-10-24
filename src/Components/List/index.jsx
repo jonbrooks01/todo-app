@@ -52,16 +52,14 @@ const TodoList = ({ list, toggleComplete, incomplete, deleteItem }) => {
                   color="text.secondary"
                   gutterBottom
                 >
-                  <p>To Do: {item.text}</p>
+                  To Do: {item.text}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  <p>
-                    <small>Assigned to: {item.assignee}</small>
-                  </p>
+                  <small>Assigned to: {item.assignee}</small>
                 </Typography>
-                <p>
-                  <small>Difficulty: {item.difficulty}</small>
-                </p>
+
+                <small>Difficulty: {item.difficulty}</small>
+
                 <div onClick={() => toggleComplete(item.id)}>
                   Complete: {item.complete.toString()}
                 </div>
