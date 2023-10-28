@@ -42,46 +42,45 @@ const TodoList = ({ list, toggleComplete, incomplete, deleteItem }) => {
 
   return (
     <>
-      <Auth>
-        <Card>
-          <CardContent>
-            {listToUse.slice(startIndex, endIndex).map((item) => (
-              <div key={item.id}>
-                <Typography
-                  sx={{ fontSize: 16 }}
-                  color="text.secondary"
-                  gutterBottom
-                >
-                  To Do: {item.text}
-                </Typography>
-                <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  <small>Assigned to: {item.assignee}</small>
-                </Typography>
+      <Card>
+        <CardContent>
+          {listToUse.slice(startIndex, endIndex).map((item) => (
+            <div key={item.id}>
+              <Typography
+                sx={{ fontSize: 16 }}
+                color="text.secondary"
+                gutterBottom
+              >
+                To Do: {item.text}
+              </Typography>
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                <small>Assigned to: {item.assignee}</small>
+              </Typography>
 
-                <small>Difficulty: {item.difficulty}</small>
-
+              <small>Difficulty: {item.difficulty}</small>
+              <Auth>
                 <div onClick={() => toggleComplete(item.id)}>
                   Complete: {item.complete.toString()}
                 </div>
-                <CardActions>
-                  <Auth capability="delete">
-                    <Button size="small" onClick={() => deleteItem(item.id)}>
-                      Delete
-                    </Button>
-                  </Auth>
-                </CardActions>
-                <hr />
-              </div>
-            ))}
-            <Pagination
-              count={count}
-              variant="outlined"
-              color="secondary"
-              onChange={handlePageChange}
-            />
-          </CardContent>
-        </Card>
-      </Auth>
+              </Auth>
+              <CardActions>
+                <Auth capability="delete">
+                  <Button size="small" onClick={() => deleteItem(item.id)}>
+                    Delete
+                  </Button>
+                </Auth>
+              </CardActions>
+              <hr />
+            </div>
+          ))}
+          <Pagination
+            count={count}
+            variant="outlined"
+            color="secondary"
+            onChange={handlePageChange}
+          />
+        </CardContent>
+      </Card>
     </>
   );
 };
